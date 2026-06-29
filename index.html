@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DriveQ 2.0 — V2V Communication Research</title>
+  <title>DriveQ 2.0 — Intelligent V2V Communication</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --navy: #0B1F3A;
       --navy-mid: #162d52;
       --navy-light: #1E3A5F;
       --accent: #2563EB;
       --accent-light: #3B82F6;
-      --accent-glow: rgba(37, 99, 235, 0.12);
+      --accent-glow: rgba(37,99,235,0.12);
       --grey-100: #F7F8FA;
       --grey-200: #EEF0F4;
       --grey-400: #9CA3AF;
@@ -27,635 +26,240 @@
       --text-muted: #9CA3AF;
       --success: #10B981;
       --warning: #F59E0B;
+      --danger: #EF4444;
       --border: rgba(0,0,0,0.08);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--grey-100); color: var(--text-primary); line-height: 1.6; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--grey-100);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(11, 31, 58, 0.97);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: -0.01em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .nav-logo .logo-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      animation: pulse-dot 2s infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(0.8); }
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(11,31,58,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-light); animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.8)} }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.7); text-decoration: none; font-size: .875rem; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
 
-    /* ── HERO ── */
-    .hero {
-      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 50%, #0d2847 100%);
-      padding: 6rem 2rem 5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(37,99,235,0.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-grid-overlay {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-    }
-    .hero-inner { position: relative; max-width: 780px; margin: 0 auto; }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(37,99,235,0.18);
-      border: 1px solid rgba(59,130,246,0.35);
-      border-radius: 999px;
-      padding: 6px 16px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #93C5FD;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .hero-badge .live-dot {
-      width: 7px; height: 7px;
-      background: var(--success);
-      border-radius: 50%;
-      animation: live 2s infinite;
-    }
-    @keyframes live {
-      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
-    }
-    .hero h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.6rem, 6vw, 4rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.5rem;
-    }
-    .hero h1 span { color: #60A5FA; }
-    .hero-sub {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.55);
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .hero-desc {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.7);
-      max-width: 560px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.75;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: var(--white);
-      padding: 0.75rem 1.75rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
-    .btn-secondary {
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.85);
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 0.75rem 1.75rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-secondary:hover { background: rgba(255,255,255,0.14); transform: translateY(-1px); }
+    /* HERO */
+    .hero { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 50%, #0d2847 100%); padding: 6rem 2rem 5rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(37,99,235,.18) 0%, transparent 70%); pointer-events:none; }
+    .hero-grid-overlay { position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:48px 48px; pointer-events:none; }
+    .hero-inner { position:relative; max-width:820px; margin:0 auto; }
+    .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(37,99,235,.18); border:1px solid rgba(59,130,246,.35); border-radius:999px; padding:6px 16px; font-size:.78rem; font-weight:600; color:#93C5FD; letter-spacing:.06em; text-transform:uppercase; margin-bottom:1.5rem; }
+    .hero-badge .live-dot { width:7px; height:7px; background:var(--success); border-radius:50%; animation:live 2s infinite; }
+    @keyframes live { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(2.6rem,6vw,4rem); font-weight:700; color:var(--white); line-height:1.1; letter-spacing:-.03em; margin-bottom:.4rem; }
+    .hero h1 span { color:#60A5FA; }
+    .hero-tagline { font-size:1rem; color:rgba(255,255,255,.6); font-weight:500; letter-spacing:.08em; text-transform:uppercase; margin-bottom:1.25rem; }
+    .hero-pillars { display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem; margin-bottom:1.75rem; }
+    .hero-pillar { font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:5px 14px; border-radius:999px; border:1px solid rgba(59,130,246,.3); color:#93C5FD; background:rgba(37,99,235,.12); }
+    .hero-desc { font-size:1rem; color:rgba(255,255,255,.65); max-width:580px; margin:0 auto 1.5rem; line-height:1.75; }
+    .hero-features-row { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+    .hero-feat { display:flex; flex-direction:column; align-items:center; gap:6px; }
+    .hero-feat i { font-size:1.3rem; color:#60A5FA; }
+    .hero-feat span { font-size:.72rem; color:rgba(255,255,255,.55); font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
+    .hero-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .btn-primary { background:var(--accent); color:var(--white); padding:.75rem 1.75rem; border-radius:var(--radius-sm); font-weight:600; font-size:.9rem; text-decoration:none; transition:background .2s,transform .15s; display:inline-flex; align-items:center; gap:8px; }
+    .btn-primary:hover { background:var(--accent-light); transform:translateY(-1px); }
+    .btn-secondary { background:rgba(255,255,255,.08); color:rgba(255,255,255,.85); border:1px solid rgba(255,255,255,.15); padding:.75rem 1.75rem; border-radius:var(--radius-sm); font-weight:600; font-size:.9rem; text-decoration:none; transition:background .2s,transform .15s; display:inline-flex; align-items:center; gap:8px; }
+    .btn-secondary:hover { background:rgba(255,255,255,.14); transform:translateY(-1px); }
 
-    /* ── SECTIONS ── */
-    section { padding: 5rem 2rem; }
-    .section-inner { max-width: 1120px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-    }
-    .section-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-    }
-    .section-desc {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      max-width: 540px;
-      line-height: 1.7;
-      margin-bottom: 3rem;
-    }
+    /* SECTIONS */
+    section { padding:5rem 2rem; }
+    .section-inner { max-width:1120px; margin:0 auto; }
+    .section-label { font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:.6rem; }
+    .section-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(1.6rem,3vw,2.2rem); font-weight:700; color:var(--navy); letter-spacing:-.02em; margin-bottom:.75rem; }
+    .section-desc { font-size:1rem; color:var(--text-secondary); max-width:560px; line-height:1.7; margin-bottom:3rem; }
 
-    /* ── PROJECT STATUS ── */
-    #status { background: var(--white); }
+    /* WHAT IS / SYSTEM OVERVIEW */
+    #overview { background:var(--white); }
+    .overview-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.5rem; }
+    @media(max-width:768px){ .overview-grid{ grid-template-columns:1fr; } }
+    .ov-card { border:1px solid var(--border); border-radius:var(--radius-md); padding:1.75rem; background:var(--grey-100); }
+    .ov-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:1rem; display:flex; align-items:center; gap:8px; }
+    .ov-card h3 i { color:var(--accent); font-size:1.1rem; }
+    .ov-card p { font-size:.875rem; color:var(--text-secondary); line-height:1.7; }
 
-    .status-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    @media (max-width: 700px) { .status-grid { grid-template-columns: 1fr; } }
+    /* SYSTEM DIAGRAM */
+    .sys-diagram { background:var(--navy); border-radius:var(--radius-md); padding:2rem; margin-top:0; }
+    .sys-diagram-title { text-align:center; font-size:.8rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-bottom:1.5rem; }
+    .sys-nodes { display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap; }
+    .sys-node { text-align:center; }
+    .sys-node-box { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius-sm); padding:.875rem 1.1rem; min-width:110px; }
+    .sys-node-box i { color:#60A5FA; font-size:1.4rem; display:block; margin-bottom:6px; }
+    .sys-node-box .sn-label { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:rgba(255,255,255,.5); }
+    .sys-node-box .sn-name { font-size:.82rem; font-weight:600; color:rgba(255,255,255,.88); margin-top:2px; }
+    .sys-arrow { padding:0 .75rem; color:rgba(255,255,255,.25); font-size:1.1rem; flex-shrink:0; }
+    .sys-arrow.both { display:flex; flex-direction:column; align-items:center; gap:2px; font-size:.85rem; }
+    .tag-row { display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin-top:1.25rem; }
+    .sys-tag { font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; padding:4px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.5); }
 
-    .status-card {
-      background: var(--grey-100);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.75rem;
-    }
-    .status-card h3 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .status-card h3 i { color: var(--accent); }
+    /* KEY FEATURES */
+    #features { background:var(--grey-100); }
+    .features-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.25rem; }
+    .feat-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-md); padding:1.5rem; display:flex; gap:1rem; align-items:flex-start; transition:box-shadow .2s,transform .2s; }
+    .feat-card:hover { box-shadow:0 8px 32px rgba(11,31,58,.09); transform:translateY(-2px); }
+    .feat-icon { width:42px; height:42px; background:var(--accent-glow); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .feat-icon i { color:var(--accent); font-size:1.1rem; }
+    .feat-card h4 { font-family:'Space Grotesk',sans-serif; font-size:.9rem; font-weight:600; color:var(--navy); margin-bottom:4px; }
+    .feat-card p { font-size:.8rem; color:var(--text-secondary); line-height:1.55; }
 
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .timeline-item {
-      display: flex;
-      gap: 1rem;
-      padding-bottom: 1.5rem;
-      position: relative;
-    }
-    .timeline-item:last-child { padding-bottom: 0; }
-    .tl-left { display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; }
-    .tl-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-      border: 2.5px solid var(--accent);
-      background: var(--white);
-      margin-top: 3px;
-      flex-shrink: 0;
-      z-index: 1;
-    }
-    .tl-dot.filled { background: var(--accent); }
-    .tl-dot.active {
-      background: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-glow);
-      animation: ring-pulse 2s infinite;
-    }
-    @keyframes ring-pulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(37,99,235,0.15); }
-      50% { box-shadow: 0 0 0 8px rgba(37,99,235,0.05); }
-    }
-    .tl-line {
-      width: 2px;
-      flex: 1;
-      background: var(--grey-200);
-      min-height: 24px;
-    }
-    .tl-line.done { background: var(--accent); }
-    .tl-content { flex: 1; }
-    .tl-date {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-bottom: 2px;
-    }
-    .tl-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--navy);
-    }
-    .tl-note {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-top: 2px;
-    }
-    .tl-badge {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 999px;
-      margin-top: 4px;
-    }
-    .badge-done { background: #D1FAE5; color: #065F46; }
-    .badge-active { background: #DBEAFE; color: #1D4ED8; }
-    .badge-upcoming { background: var(--grey-200); color: var(--grey-600); }
+    /* AI COLLISION */
+    #ai { background:var(--white); }
+    .ai-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+    @media(max-width:700px){ .ai-grid{ grid-template-columns:1fr; } }
+    .ai-desc p { font-size:.9rem; color:var(--text-secondary); line-height:1.7; margin-bottom:1.25rem; }
+    .ai-levels { display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; }
+    @media(max-width:500px){ .ai-levels{ grid-template-columns:repeat(2,1fr); } }
+    .ai-level { border-radius:var(--radius-sm); padding:1rem .75rem; text-align:center; }
+    .ai-level i { font-size:1.4rem; display:block; margin-bottom:6px; }
+    .ai-level .al-label { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+    .level-safe { background:#D1FAE5; }
+    .level-safe i,.level-safe .al-label { color:#065F46; }
+    .level-caution { background:#FEF3C7; }
+    .level-caution i,.level-caution .al-label { color:#92400E; }
+    .level-warning { background:#FEE2E2; }
+    .level-warning i,.level-warning .al-label { color:#991B1B; }
+    .level-risk { background:#7F1D1D; }
+    .level-risk i { color:#FCA5A5; }
+    .level-risk .al-label { color:#FCA5A5; }
+    .tech-stack-card { background:var(--grey-100); border:1px solid var(--border); border-radius:var(--radius-md); padding:1.75rem; }
+    .tech-stack-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:1.25rem; display:flex; align-items:center; gap:8px; }
+    .tech-stack-card h3 i { color:var(--accent); }
+    .tech-row { display:flex; align-items:flex-start; gap:.875rem; padding:.75rem 0; border-bottom:1px solid var(--border); }
+    .tech-row:last-child { border-bottom:none; padding-bottom:0; }
+    .tech-row i { color:var(--accent); font-size:.95rem; margin-top:2px; flex-shrink:0; width:18px; }
+    .tech-row div { flex:1; }
+    .tech-row .tr-cat { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); }
+    .tech-row .tr-val { font-size:.83rem; font-weight:500; color:var(--navy); margin-top:1px; }
 
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .stat-box {
-      text-align: center;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1rem 0.5rem;
-    }
-    .stat-box .stat-val {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--navy);
-      display: block;
-    }
-    .stat-box .stat-lbl {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .stat-box.accent .stat-val { color: var(--accent); }
+    /* TECHNOLOGIES */
+    #technologies { background:var(--grey-100); }
+    .tech-chips { display:flex; flex-wrap:wrap; gap:.75rem; margin-bottom:2.5rem; }
+    .tech-chip { display:flex; align-items:center; gap:8px; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:.625rem 1rem; font-size:.82rem; font-weight:500; color:var(--navy); }
+    .tech-chip i { color:var(--accent); font-size:.9rem; }
 
-    .progress-bar-wrap { margin-top: 1.25rem; }
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-    .progress-label span:last-child { font-weight: 600; color: var(--accent); }
-    .progress-track {
-      height: 7px;
-      background: var(--grey-200);
-      border-radius: 999px;
-      overflow: hidden;
-      margin-bottom: 0.75rem;
-    }
-    .progress-fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
-      transition: width 1s ease;
-    }
+    /* PROJECT STATUS */
+    #status { background:var(--white); }
+    .status-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    @media(max-width:700px){ .status-grid{ grid-template-columns:1fr; } }
+    .status-card { background:var(--grey-100); border:1px solid var(--border); border-radius:var(--radius-md); padding:1.75rem; }
+    .status-card h3 { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:600; color:var(--navy); margin-bottom:1.25rem; display:flex; align-items:center; gap:8px; }
+    .status-card h3 i { color:var(--accent); }
+    .timeline { display:flex; flex-direction:column; gap:0; }
+    .timeline-item { display:flex; gap:1rem; padding-bottom:1.5rem; }
+    .timeline-item:last-child { padding-bottom:0; }
+    .tl-left { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+    .tl-dot { width:12px; height:12px; border-radius:50%; border:2.5px solid var(--accent); background:var(--white); margin-top:3px; flex-shrink:0; z-index:1; }
+    .tl-dot.filled { background:var(--accent); }
+    .tl-dot.active { background:var(--accent); box-shadow:0 0 0 4px var(--accent-glow); animation:ring-pulse 2s infinite; }
+    @keyframes ring-pulse { 0%,100%{box-shadow:0 0 0 4px rgba(37,99,235,.15)} 50%{box-shadow:0 0 0 8px rgba(37,99,235,.05)} }
+    .tl-line { width:2px; flex:1; background:var(--grey-200); min-height:24px; }
+    .tl-line.done { background:var(--accent); }
+    .tl-content { flex:1; }
+    .tl-date { font-size:.75rem; color:var(--text-muted); font-weight:500; margin-bottom:2px; }
+    .tl-title { font-size:.9rem; font-weight:600; color:var(--navy); }
+    .tl-note { font-size:.8rem; color:var(--text-secondary); margin-top:2px; }
+    .tl-badge { display:inline-block; font-size:.7rem; font-weight:700; padding:2px 8px; border-radius:999px; margin-top:4px; }
+    .badge-done { background:#D1FAE5; color:#065F46; }
+    .badge-active { background:#DBEAFE; color:#1D4ED8; }
+    .badge-upcoming { background:var(--grey-200); color:var(--grey-600); }
+    .progress-bar-wrap { margin-top:1.25rem; }
+    .progress-label { display:flex; justify-content:space-between; font-size:.8rem; color:var(--text-secondary); margin-bottom:6px; }
+    .progress-label span:last-child { font-weight:600; color:var(--accent); }
+    .progress-track { height:7px; background:var(--grey-200); border-radius:999px; overflow:hidden; margin-bottom:.75rem; }
+    .progress-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,var(--accent) 0%,var(--accent-light) 100%); }
+    .stat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1rem; }
+    .stat-box { text-align:center; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-sm); padding:1rem .5rem; }
+    .stat-box .stat-val { font-family:'Space Grotesk',sans-serif; font-size:1.5rem; font-weight:700; color:var(--navy); display:block; }
+    .stat-box .stat-lbl { font-size:.72rem; color:var(--text-muted); font-weight:500; text-transform:uppercase; letter-spacing:.04em; }
+    .stat-box.accent .stat-val { color:var(--accent); }
+    .ieee-badge { display:flex; align-items:center; gap:10px; background:linear-gradient(135deg,#1E3A5F 0%,#0B1F3A 100%); border:1px solid rgba(59,130,246,.3); border-radius:var(--radius-sm); padding:.875rem 1.1rem; margin-top:1.25rem; text-decoration:none; transition:border-color .2s; }
+    .ieee-badge:hover { border-color:rgba(59,130,246,.6); }
+    .ieee-badge i { color:#60A5FA; font-size:1.3rem; flex-shrink:0; }
+    .ieee-badge .ieee-text small { display:block; font-size:.7rem; color:rgba(255,255,255,.45); text-transform:uppercase; letter-spacing:.06em; font-weight:600; }
+    .ieee-badge .ieee-text strong { display:block; font-size:.85rem; color:rgba(255,255,255,.88); font-weight:500; }
+    .ieee-badge .ieee-arrow { margin-left:auto; color:rgba(255,255,255,.3); font-size:.9rem; }
 
-    .ieee-badge {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #1E3A5F 0%, #0B1F3A 100%);
-      border: 1px solid rgba(59,130,246,0.3);
-      border-radius: var(--radius-sm);
-      padding: 0.875rem 1.1rem;
-      margin-top: 1.25rem;
-      text-decoration: none;
-      transition: border-color 0.2s;
-    }
-    .ieee-badge:hover { border-color: rgba(59,130,246,0.6); }
-    .ieee-badge i { color: #60A5FA; font-size: 1.3rem; flex-shrink: 0; }
-    .ieee-badge .ieee-text small {
-      display: block;
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.45);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-weight: 600;
-    }
-    .ieee-badge .ieee-text strong {
-      display: block;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.88);
-      font-weight: 500;
-    }
-    .ieee-badge .ieee-arrow {
-      margin-left: auto;
-      color: rgba(255,255,255,0.3);
-      font-size: 0.9rem;
-    }
+    /* DEPLOYMENT PHASES */
+    #deployment { background:var(--grey-100); }
+    .phases-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
+    @media(max-width:700px){ .phases-row{ grid-template-columns:repeat(2,1fr); } }
+    .phase-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-md); padding:1.5rem 1.25rem; text-align:center; position:relative; }
+    .phase-num { font-family:'Space Grotesk',sans-serif; font-size:2rem; font-weight:700; color:var(--grey-200); line-height:1; margin-bottom:.5rem; }
+    .phase-icon { font-size:1.5rem; color:var(--accent); margin-bottom:.75rem; display:block; }
+    .phase-card h4 { font-family:'Space Grotesk',sans-serif; font-size:.9rem; font-weight:700; color:var(--navy); margin-bottom:6px; }
+    .phase-card p { font-size:.78rem; color:var(--text-secondary); line-height:1.5; }
+    .phase-connector { display:none; }
 
-    /* ── TEAM ── */
-    #team { background: var(--grey-100); }
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-    .team-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.75rem 1.25rem 1.5rem;
-      text-align: center;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .team-card:hover {
-      box-shadow: 0 8px 32px rgba(11,31,58,0.1);
-      transform: translateY(-3px);
-    }
-    .avatar-ring {
-      width: 82px; height: 82px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent) 0%, #1E40AF 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.1rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--white);
-      position: relative;
-      overflow: hidden;
-    }
-    .avatar-ring img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      position: absolute;
-      inset: 0;
-    }
-    .member-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 3px;
-    }
-    .member-role {
-      font-size: 0.78rem;
-      color: var(--accent);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
-    }
-    .member-field {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-    .member-linkedin {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: #2563EB;
-      text-decoration: none;
-      border: 1px solid rgba(37,99,235,0.2);
-      padding: 5px 12px;
-      border-radius: 999px;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .member-linkedin:hover {
-      background: var(--accent-glow);
-      border-color: rgba(37,99,235,0.4);
-    }
-    .member-linkedin i { font-size: 0.85rem; }
+    /* IMPACT */
+    #impact { background:var(--white); }
+    .impact-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.25rem; }
+    .impact-card { border:1px solid var(--border); border-radius:var(--radius-md); padding:1.5rem; background:var(--grey-100); display:flex; gap:.875rem; align-items:flex-start; }
+    .impact-icon { width:40px; height:40px; background:var(--accent-glow); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .impact-icon i { color:var(--accent); font-size:1rem; }
+    .impact-card h4 { font-family:'Space Grotesk',sans-serif; font-size:.88rem; font-weight:600; color:var(--navy); margin-bottom:3px; }
+    .impact-card p { font-size:.78rem; color:var(--text-secondary); line-height:1.5; }
 
-    /* ── RESEARCH FOCUS ── */
-    #research { background: var(--white); }
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.25rem;
-    }
-    .research-card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      background: var(--grey-100);
-    }
-    .research-icon {
-      width: 44px; height: 44px;
-      background: var(--accent-glow);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .research-icon i { color: var(--accent); font-size: 1.2rem; }
-    .research-card h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-    .research-card p {
-      font-size: 0.83rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
+    /* APPLICATIONS */
+    #applications { background:var(--grey-100); }
+    .app-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; }
+    .app-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius-md); padding:1.5rem 1rem; text-align:center; transition:box-shadow .2s,transform .2s; }
+    .app-card:hover { box-shadow:0 6px 24px rgba(11,31,58,.09); transform:translateY(-2px); }
+    .app-card i { font-size:1.6rem; color:var(--accent); display:block; margin-bottom:.625rem; }
+    .app-card span { font-size:.82rem; font-weight:600; color:var(--navy); }
 
-    /* ── CONTACT ── */
-    #contact { background: var(--navy); }
-    #contact .section-label { color: #93C5FD; }
-    #contact .section-title { color: var(--white); }
-    #contact .section-desc { color: rgba(255,255,255,0.6); }
+    /* TEAM */
+    #team { background:var(--white); }
+    .team-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1.5rem; }
+    .team-card { background:var(--grey-100); border:1px solid var(--border); border-radius:var(--radius-md); padding:1.75rem 1.25rem 1.5rem; text-align:center; transition:box-shadow .2s,transform .2s; }
+    .team-card:hover { box-shadow:0 8px 32px rgba(11,31,58,.1); transform:translateY(-3px); }
+    .avatar-ring { width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,var(--accent) 0%,#1E40AF 100%); display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; font-family:'Space Grotesk',sans-serif; font-size:1.25rem; font-weight:700; color:var(--white); position:relative; overflow:hidden; }
+    .avatar-ring img { width:100%; height:100%; object-fit:cover; border-radius:50%; position:absolute; inset:0; }
+    .member-name { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:3px; }
+    .member-role { font-size:.75rem; color:var(--accent); font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
+    .member-field { font-size:.78rem; color:var(--text-secondary); margin-bottom:.875rem; line-height:1.5; }
+    .member-linkedin { display:inline-flex; align-items:center; gap:6px; font-size:.78rem; font-weight:600; color:#2563EB; text-decoration:none; border:1px solid rgba(37,99,235,.2); padding:5px 12px; border-radius:999px; transition:background .2s,border-color .2s; }
+    .member-linkedin:hover { background:var(--accent-glow); border-color:rgba(37,99,235,.4); }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: start;
-    }
-    @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
+    /* CONTACT */
+    #contact { background:var(--navy); }
+    #contact .section-label { color:#93C5FD; }
+    #contact .section-title { color:var(--white); }
+    #contact .section-desc { color:rgba(255,255,255,.6); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start; }
+    @media(max-width:700px){ .contact-grid{ grid-template-columns:1fr; } }
+    .contact-form { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:var(--radius-md); padding:2rem; }
+    .form-group { margin-bottom:1.25rem; }
+    .form-group label { display:block; font-size:.8rem; font-weight:600; color:rgba(255,255,255,.55); margin-bottom:6px; text-transform:uppercase; letter-spacing:.05em; }
+    .form-group input,.form-group textarea,.form-group select { width:100%; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:var(--radius-sm); padding:.75rem 1rem; color:var(--white); font-size:.9rem; font-family:'Inter',sans-serif; transition:border-color .2s,background .2s; outline:none; }
+    .form-group select option { background:var(--navy); color:var(--white); }
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus { border-color:rgba(59,130,246,.5); background:rgba(255,255,255,.1); }
+    .form-group input::placeholder,.form-group textarea::placeholder { color:rgba(255,255,255,.25); }
+    .form-group textarea { min-height:110px; resize:vertical; }
+    .form-submit { width:100%; background:var(--accent); color:var(--white); border:none; padding:.85rem; border-radius:var(--radius-sm); font-size:.9rem; font-weight:600; cursor:pointer; transition:background .2s; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .form-submit:hover { background:var(--accent-light); }
+    .contact-info { display:flex; flex-direction:column; gap:1.25rem; }
+    .contact-item { display:flex; align-items:flex-start; gap:1rem; }
+    .contact-item-icon { width:42px; height:42px; background:rgba(37,99,235,.2); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .contact-item-icon i { color:#93C5FD; font-size:1rem; }
+    .contact-item h4 { font-size:.78rem; color:rgba(255,255,255,.45); text-transform:uppercase; letter-spacing:.06em; font-weight:600; margin-bottom:3px; }
+    .contact-item p,.contact-item a { font-size:.875rem; color:rgba(255,255,255,.8); text-decoration:none; }
+    .contact-item a:hover { color:#93C5FD; }
 
-    .contact-form {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-md);
-      padding: 2rem;
-    }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-group label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem 1rem;
-      color: var(--white);
-      font-size: 0.9rem;
-      font-family: 'Inter', sans-serif;
-      transition: border-color 0.2s, background 0.2s;
-      outline: none;
-    }
-    .form-group select option { background: var(--navy); color: var(--white); }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: rgba(59,130,246,0.5);
-      background: rgba(255,255,255,0.1);
-    }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
-    .form-group textarea { min-height: 110px; resize: vertical; }
-    .form-submit {
-      width: 100%;
-      background: var(--accent);
-      color: var(--white);
-      border: none;
-      padding: 0.85rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .form-submit:hover { background: var(--accent-light); }
+    /* FOOTER */
+    footer { background:#060F1E; padding:2rem; text-align:center; border-top:1px solid rgba(255,255,255,.06); }
+    footer p { font-size:.82rem; color:rgba(255,255,255,.3); }
+    footer strong { color:rgba(255,255,255,.55); }
+    footer a { color:rgba(255,255,255,.35); text-decoration:none; }
+    footer a:hover { color:rgba(255,255,255,.6); }
 
-    .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-    .contact-item-icon {
-      width: 42px; height: 42px;
-      background: rgba(37,99,235,0.2);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .contact-item-icon i { color: #93C5FD; font-size: 1rem; }
-    .contact-item h4 {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.45);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      font-weight: 600;
-      margin-bottom: 3px;
-    }
-    .contact-item p, .contact-item a {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.85);
-      text-decoration: none;
-    }
-    .contact-item a:hover { color: #93C5FD; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #060F1E;
-      padding: 2rem;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    footer p {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.3);
-    }
-    footer strong { color: rgba(255,255,255,0.55); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .team-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-row { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 480px) {
-      .team-grid { grid-template-columns: 1fr; }
-    }
+    @media(max-width:768px){ .nav-links{display:none} }
   </style>
 </head>
 <body>
@@ -663,14 +267,13 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <span class="logo-dot"></span>
-      DriveQ 2.0
-    </a>
+    <a href="#" class="nav-logo"><span class="logo-dot"></span>DriveQ 2.0</a>
     <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#ai">AI Engine</a></li>
       <li><a href="#status">Status</a></li>
       <li><a href="#team">Team</a></li>
-      <li><a href="#research">Research</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -680,24 +283,206 @@
 <section class="hero">
   <div class="hero-grid-overlay"></div>
   <div class="hero-inner">
-    <div class="hero-badge">
-      <span class="live-dot"></span>
-      Active R&amp;D — V2V Communication
-    </div>
+    <div class="hero-badge"><span class="live-dot"></span>Active R&amp;D — V2V Communication</div>
     <h1>Drive<span>Q</span> 2.0</h1>
-    <p class="hero-sub">Vehicle-to-Vehicle Communication System</p>
-    <p class="hero-desc">
-      Next-generation V2V communication research aimed at enabling real-time,
-      low-latency data exchange between autonomous and connected vehicles for
-      safer, smarter roads.
-    </p>
+    <p class="hero-tagline">Intelligent V2V Communication for Safer Roads &amp; Smarter Future</p>
+    <div class="hero-pillars">
+      <span class="hero-pillar">Secure Communication</span>
+      <span class="hero-pillar">Vehicle Telemetry</span>
+      <span class="hero-pillar">AI Prediction</span>
+      <span class="hero-pillar">Real-World Deployment</span>
+    </div>
+    <p class="hero-desc">A research-grade intelligent transportation platform combining real-time V2V communication, OBD-II telemetry, and AI-based collision prediction using Closed Form Neural Networks.</p>
+    <div class="hero-features-row">
+      <div class="hero-feat"><i class="fa-solid fa-wifi"></i><span>Connect</span></div>
+      <div class="hero-feat"><i class="fa-solid fa-comments"></i><span>Communicate</span></div>
+      <div class="hero-feat"><i class="fa-solid fa-brain"></i><span>Predict</span></div>
+      <div class="hero-feat"><i class="fa-solid fa-shield-halved"></i><span>Protect</span></div>
+      <div class="hero-feat"><i class="fa-solid fa-heart-pulse"></i><span>Save Lives</span></div>
+    </div>
     <div class="hero-actions">
-      <a href="#status" class="btn-primary">
-        <i class="fa-solid fa-chart-line"></i> View Progress
-      </a>
-      <a href="https://ieeexplore.ieee.org/document/10559332" target="_blank" rel="noopener" class="btn-secondary">
-        <i class="fa-solid fa-file-lines"></i> IEEE Publication
-      </a>
+      <a href="#status" class="btn-primary"><i class="fa-solid fa-chart-line"></i>View Progress</a>
+      <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener" class="btn-secondary"><i class="fa-solid fa-file-lines"></i>IEEE Publication</a>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="section-inner">
+    <p class="section-label">System Overview</p>
+    <h2 class="section-title">What is DriveQ 2.0?</h2>
+    <p class="section-desc">A next-generation V2V communication system designed to enhance road safety, optimize traffic management, and support smart transportation ecosystems.</p>
+
+    <div class="overview-grid" style="margin-bottom:1.5rem;">
+      <div class="ov-card">
+        <h3><i class="fa-solid fa-car-side"></i>The Problem</h3>
+        <p>Modern vehicles lack real-time peer-to-peer communication. Drivers have no advance warning of hazards beyond their line of sight, leading to preventable accidents and inefficient traffic flow.</p>
+      </div>
+      <div class="ov-card">
+        <h3><i class="fa-solid fa-microchip"></i>Our Solution</h3>
+        <p>DriveQ 2.0 uses ESP32 hardware with LoRa/DSRC/C-V2X radios and OBD-II vehicle data to create a mesh of communicating vehicles, feeding an AI engine that predicts collisions before they occur.</p>
+      </div>
+      <div class="ov-card">
+        <h3><i class="fa-solid fa-bullseye"></i>The Goal</h3>
+        <p>Real-world deployment across fleet, emergency, and public road scenarios — with a fully open-sourced platform and follow-up IEEE publication upon project completion.</p>
+      </div>
+    </div>
+
+    <!-- System Diagram -->
+    <div class="sys-diagram">
+      <div class="sys-diagram-title">System Architecture — V2V Communication Flow</div>
+      <div class="sys-nodes">
+        <div class="sys-node">
+          <div class="sys-node-box">
+            <i class="fa-solid fa-car"></i>
+            <div class="sn-label">Vehicle A</div>
+            <div class="sn-name">OBD-II / CAN</div>
+          </div>
+        </div>
+        <div class="sys-arrow both">
+          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="sys-node">
+          <div class="sys-node-box">
+            <i class="fa-solid fa-tower-broadcast"></i>
+            <div class="sn-label">LoRa / DSRC</div>
+            <div class="sn-name">V2V Link</div>
+          </div>
+        </div>
+        <div class="sys-arrow both">
+          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="sys-node">
+          <div class="sys-node-box">
+            <i class="fa-solid fa-cloud"></i>
+            <div class="sn-label">Cloud</div>
+            <div class="sn-name">Analytics</div>
+          </div>
+        </div>
+        <div class="sys-arrow both">
+          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="sys-node">
+          <div class="sys-node-box">
+            <i class="fa-solid fa-brain"></i>
+            <div class="sn-label">AI Engine</div>
+            <div class="sn-name">CFNN Predict</div>
+          </div>
+        </div>
+        <div class="sys-arrow both">
+          <i class="fa-solid fa-arrow-right"></i>
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="sys-node">
+          <div class="sys-node-box">
+            <i class="fa-solid fa-car"></i>
+            <div class="sn-label">Vehicle B</div>
+            <div class="sn-name">OBD-II / CAN</div>
+          </div>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="sys-tag">Telemetry Data</span>
+        <span class="sys-tag">Collision Prediction</span>
+        <span class="sys-tag">GPS / GNSS</span>
+        <span class="sys-tag">AES Encryption</span>
+        <span class="sys-tag">Edge AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <p class="section-label">Key Features</p>
+    <h2 class="section-title">What DriveQ 2.0 Does</h2>
+    <p class="section-desc">Six core capabilities designed for real-world intelligent transportation scenarios.</p>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa-solid fa-wifi"></i></div>
+        <div><h4>Real-time V2V Communication</h4><p>Sub-50ms peer-to-peer messaging between vehicles using LoRa, DSRC, and C-V2X protocols.</p></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <div><h4>Vehicle Telemetry (OBD-II &amp; CAN)</h4><p>Live data extraction — speed, RPM, throttle, braking — directly from the vehicle's OBD-II port via CAN Bus.</p></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa-solid fa-brain"></i></div>
+        <div><h4>AI-Based Collision Prediction</h4><p>Closed Form Neural Networks (CFNN) process telemetry streams to predict collision risk in real time.</p></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa-solid fa-lock"></i></div>
+        <div><h4>Secure &amp; Lightweight Communication</h4><p>AES encryption with anti-spoofing authentication — built for low-latency, resource-constrained ESP32 hardware.</p></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa-solid fa-truck-medical"></i></div>
+        <div><h4>Emergency Vehicle Prioritization</h4><p>Automatic right-of-way signalling for ambulances and fire trucks using V2V broadcast.</p></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fa-solid fa-traffic-light"></i></div>
+        <div><h4>Traffic Optimization &amp; Intelligence</h4><p>Aggregate vehicle data feeds a cloud analytics layer to improve routing and reduce congestion.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI COLLISION PREDICTION + TECH STACK -->
+<section id="ai">
+  <div class="section-inner">
+    <p class="section-label">AI Engine</p>
+    <h2 class="section-title">AI Collision Prediction</h2>
+    <p class="section-desc">Predicting possible collisions before they occur using Closed Form Neural Networks (CFNN).</p>
+    <div class="ai-grid">
+      <div class="ai-desc">
+        <p>DriveQ's CFNN model ingests real-time telemetry from OBD-II (speed, brake pressure, acceleration) and fuses it with GPS proximity data from neighbouring vehicles to compute a collision risk score every 100ms.</p>
+        <p>Unlike conventional neural networks, CFNN offers deterministic computation time — critical for embedded systems where latency guarantees are non-negotiable.</p>
+        <div class="ai-levels">
+          <div class="ai-level level-safe">
+            <i class="fa-solid fa-circle-check"></i>
+            <div class="al-label">Safe</div>
+          </div>
+          <div class="ai-level level-caution">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <div class="al-label">Caution</div>
+          </div>
+          <div class="ai-level level-warning">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div class="al-label">Warning</div>
+          </div>
+          <div class="ai-level level-risk">
+            <i class="fa-solid fa-circle-radiation"></i>
+            <div class="al-label">Collision Risk</div>
+          </div>
+        </div>
+      </div>
+      <div class="tech-stack-card">
+        <h3><i class="fa-solid fa-layer-group"></i>Technology Stack</h3>
+        <div class="tech-row">
+          <i class="fa-solid fa-microchip"></i>
+          <div><div class="tr-cat">Hardware</div><div class="tr-val">ESP32, LoRa, GPS / GNSS, OBD-II, CAN Bus</div></div>
+        </div>
+        <div class="tech-row">
+          <i class="fa-solid fa-tower-broadcast"></i>
+          <div><div class="tr-cat">Communication</div><div class="tr-val">LoRa / DSRC / C-V2X</div></div>
+        </div>
+        <div class="tech-row">
+          <i class="fa-solid fa-brain"></i>
+          <div><div class="tr-cat">AI / ML</div><div class="tr-val">Closed Form Neural Networks (CFNN), Edge AI</div></div>
+        </div>
+        <div class="tech-row">
+          <i class="fa-solid fa-lock"></i>
+          <div><div class="tr-cat">Security</div><div class="tr-val">AES Encryption, Authentication, Anti-Spoofing</div></div>
+        </div>
+        <div class="tech-row">
+          <i class="fa-solid fa-cloud"></i>
+          <div><div class="tr-cat">Cloud</div><div class="tr-val">Data Storage, Analytics, Visualisation</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -707,145 +492,63 @@
   <div class="section-inner">
     <p class="section-label">Project Status</p>
     <h2 class="section-title">Research &amp; Development Timeline</h2>
-    <p class="section-desc">
-      DriveQ began as a final year engineering project, with the foundational work
-      published on IEEE Xplore in 2024. Version 2.0 is currently under active research
-      and development.
-    </p>
-
+    <p class="section-desc">From a final year B.Tech project published on IEEE Xplore in 2024, now expanding into a full research-grade platform.</p>
     <div class="status-grid">
-      <!-- Timeline -->
       <div class="status-card">
-        <h3><i class="fa-solid fa-timeline"></i> Project Milestones</h3>
+        <h3><i class="fa-solid fa-timeline"></i>Project Milestones</h3>
         <div class="timeline">
-
           <div class="timeline-item">
-            <div class="tl-left">
-              <div class="tl-dot filled"></div>
-              <div class="tl-line done"></div>
-            </div>
-            <div class="tl-content">
-              <div class="tl-date">January 2023</div>
-              <div class="tl-title">Project Initiated</div>
-              <div class="tl-note">Final year B.Tech project kickoff</div>
-              <span class="tl-badge badge-done">Completed</span>
-            </div>
+            <div class="tl-left"><div class="tl-dot filled"></div><div class="tl-line done"></div></div>
+            <div class="tl-content"><div class="tl-date">January 2023</div><div class="tl-title">Project Initiated</div><div class="tl-note">Final year B.Tech project kickoff</div><span class="tl-badge badge-done">Completed</span></div>
           </div>
-
           <div class="timeline-item">
-            <div class="tl-left">
-              <div class="tl-dot filled"></div>
-              <div class="tl-line done"></div>
-            </div>
-            <div class="tl-content">
-              <div class="tl-date">July 2023</div>
-              <div class="tl-title">V1 Prototype Developed</div>
-              <div class="tl-note">Core V2V protocol designed &amp; tested</div>
-              <span class="tl-badge badge-done">Completed</span>
-            </div>
+            <div class="tl-left"><div class="tl-dot filled"></div><div class="tl-line done"></div></div>
+            <div class="tl-content"><div class="tl-date">July 2023</div><div class="tl-title">V1 Prototype Developed</div><div class="tl-note">Core V2V protocol designed &amp; tested</div><span class="tl-badge badge-done">Completed</span></div>
           </div>
-
           <div class="timeline-item">
-            <div class="tl-left">
-              <div class="tl-dot filled"></div>
-              <div class="tl-line done"></div>
-            </div>
-            <div class="tl-content">
-              <div class="tl-date">2024</div>
-              <div class="tl-title">Published on IEEE Xplore</div>
-              <div class="tl-note">DriveQ V1 research paper accepted &amp; published</div>
-              <span class="tl-badge badge-done">Completed</span>
-            </div>
+            <div class="tl-left"><div class="tl-dot filled"></div><div class="tl-line done"></div></div>
+            <div class="tl-content"><div class="tl-date">2024</div><div class="tl-title">Published on IEEE Xplore</div><div class="tl-note">DriveQ V1 research paper accepted &amp; published</div><span class="tl-badge badge-done">Completed</span></div>
           </div>
-
           <div class="timeline-item">
-            <div class="tl-left">
-              <div class="tl-dot active"></div>
-              <div class="tl-line"></div>
-            </div>
-            <div class="tl-content">
-              <div class="tl-date">2025 — Present</div>
-              <div class="tl-title">DriveQ 2.0 R&amp;D Phase</div>
-              <div class="tl-note">Expanded team, new communication protocols</div>
-              <span class="tl-badge badge-active">In Progress</span>
-            </div>
+            <div class="tl-left"><div class="tl-dot active"></div><div class="tl-line"></div></div>
+            <div class="tl-content"><div class="tl-date">2025 — Present</div><div class="tl-title">DriveQ 2.0 R&amp;D Phase</div><div class="tl-note">Expanded team — CFNN, CAN Bus, Cybersecurity</div><span class="tl-badge badge-active">In Progress</span></div>
           </div>
-
           <div class="timeline-item">
-            <div class="tl-left">
-              <div class="tl-dot"></div>
-              <div class="tl-line"></div>
-            </div>
-            <div class="tl-content">
-              <div class="tl-date">2026 Q3 (Est.)</div>
-              <div class="tl-title">V2 Prototype &amp; Testing</div>
-              <div class="tl-note">Field trials and performance validation</div>
-              <span class="tl-badge badge-upcoming">Upcoming</span>
-            </div>
+            <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-content"><div class="tl-date">2026 Q3 (Est.)</div><div class="tl-title">V2 Prototype &amp; Field Testing</div><div class="tl-note">Two-vehicle trials, telemetry validation</div><span class="tl-badge badge-upcoming">Upcoming</span></div>
           </div>
-
           <div class="timeline-item">
-            <div class="tl-left">
-              <div class="tl-dot"></div>
-            </div>
-            <div class="tl-content">
-              <div class="tl-date">2027 (Est.)</div>
-              <div class="tl-title">Publication &amp; Open Release</div>
-              <div class="tl-note">IEEE submission + open-source codebase</div>
-              <span class="tl-badge badge-upcoming">Upcoming</span>
-            </div>
+            <div class="tl-left"><div class="tl-dot"></div></div>
+            <div class="tl-content"><div class="tl-date">2027 (Est.)</div><div class="tl-title">IEEE Publication V2 &amp; Open Release</div><div class="tl-note">Follow-up paper + open-source codebase</div><span class="tl-badge badge-upcoming">Upcoming</span></div>
           </div>
-
         </div>
       </div>
-
-      <!-- Stats + Progress -->
       <div>
-        <div class="status-card" style="margin-bottom: 1.25rem;">
-          <h3><i class="fa-solid fa-gauge-high"></i> Current Progress</h3>
-
+        <div class="status-card" style="margin-bottom:1.25rem;">
+          <h3><i class="fa-solid fa-gauge-high"></i>Current Progress</h3>
           <div class="progress-bar-wrap">
-            <div class="progress-label">
-              <span>Protocol Design</span><span>85%</span>
-            </div>
-            <div class="progress-track"><div class="progress-fill" style="width: 85%;"></div></div>
-
-            <div class="progress-label">
-              <span>Hardware Integration</span><span>55%</span>
-            </div>
-            <div class="progress-track"><div class="progress-fill" style="width: 55%;"></div></div>
-
-            <div class="progress-label">
-              <span>Software Stack</span><span>70%</span>
-            </div>
-            <div class="progress-track"><div class="progress-fill" style="width: 70%;"></div></div>
-
-            <div class="progress-label">
-              <span>Field Testing</span><span>20%</span>
-            </div>
-            <div class="progress-track"><div class="progress-fill" style="width: 20%;"></div></div>
+            <div class="progress-label"><span>Communication Architecture</span><span>85%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:85%"></div></div>
+            <div class="progress-label"><span>OBD-II / CAN Bus Integration</span><span>60%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
+            <div class="progress-label"><span>CFNN AI Engine</span><span>70%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:70%"></div></div>
+            <div class="progress-label"><span>Cybersecurity Framework</span><span>50%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+            <div class="progress-label"><span>Mobile App &amp; Dashboard</span><span>40%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+            <div class="progress-label"><span>Field Testing</span><span>15%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width:15%"></div></div>
           </div>
-
           <div class="stat-row">
-            <div class="stat-box accent">
-              <span class="stat-val">2</span>
-              <span class="stat-lbl">Years Active</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-val">1</span>
-              <span class="stat-lbl">IEEE Paper</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-val">5</span>
-              <span class="stat-lbl">Researchers</span>
-            </div>
+            <div class="stat-box accent"><span class="stat-val">2+</span><span class="stat-lbl">Years Active</span></div>
+            <div class="stat-box"><span class="stat-val">1</span><span class="stat-lbl">IEEE Paper</span></div>
+            <div class="stat-box"><span class="stat-val">5</span><span class="stat-lbl">Researchers</span></div>
           </div>
         </div>
-
-        <!-- IEEE Badge -->
         <div class="status-card">
-          <h3><i class="fa-solid fa-graduation-cap"></i> Published Work</h3>
-          <a href="https://ieeexplore.ieee.org/document/10559332" target="_blank" rel="noopener" class="ieee-badge">
+          <h3><i class="fa-solid fa-graduation-cap"></i>Published Work</h3>
+          <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener" class="ieee-badge">
             <i class="fa-solid fa-book-open"></i>
             <div class="ieee-text">
               <small>IEEE Xplore · 2024</small>
@@ -859,106 +562,125 @@
   </div>
 </section>
 
+<!-- DEPLOYMENT PHASES -->
+<section id="deployment">
+  <div class="section-inner">
+    <p class="section-label">Real Vehicle Deployment Plan</p>
+    <h2 class="section-title">Road to Real-World Testing</h2>
+    <p class="section-desc">A four-phase deployment strategy from controlled lab testing to full public road deployment.</p>
+    <div class="phases-row">
+      <div class="phase-card">
+        <div class="phase-num">01</div>
+        <i class="fa-solid fa-car-side phase-icon"></i>
+        <h4>Two Vehicle Testing</h4>
+        <p>Controlled V2V link between two ESP32-equipped vehicles in a closed lot.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">02</div>
+        <i class="fa-solid fa-database phase-icon"></i>
+        <h4>Telemetry Collection</h4>
+        <p>OBD-II data logging at scale to train and validate the CFNN collision model.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">03</div>
+        <i class="fa-solid fa-shield-halved phase-icon"></i>
+        <h4>Closed Environment</h4>
+        <p>Multi-vehicle deployment in a private road — stress testing latency, range, and AI prediction accuracy.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">04</div>
+        <i class="fa-solid fa-road phase-icon"></i>
+        <h4>Public Road Deployment</h4>
+        <p>Real traffic conditions — fleet vehicles, emergency prioritisation, and live dashboard monitoring.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-inner">
+    <p class="section-label">Our Impact</p>
+    <h2 class="section-title">Why This Research Matters</h2>
+    <p class="section-desc">DriveQ 2.0 targets measurable outcomes in road safety and smart city infrastructure.</p>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div><h4>Reduce Road Accidents</h4><p>Early collision warning gives drivers 2–5 seconds of critical reaction time.</p></div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div><h4>Improve Traffic Efficiency</h4><p>Aggregate V2V data enables intelligent routing and congestion reduction.</p></div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon"><i class="fa-solid fa-truck-medical"></i></div>
+        <div><h4>Support Emergency Vehicles</h4><p>Automatic right-of-way broadcasting clears paths for ambulances and fire services.</p></div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon"><i class="fa-solid fa-city"></i></div>
+        <div><h4>Build Smarter Communities</h4><p>Open platform for smart city integration — scalable from campus to municipality.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section id="applications">
+  <div class="section-inner">
+    <p class="section-label">Applications</p>
+    <h2 class="section-title">Where DriveQ 2.0 Can Be Deployed</h2>
+    <p class="section-desc">Designed for versatility — from school buses to autonomous fleet management.</p>
+    <div class="app-grid">
+      <div class="app-card"><i class="fa-solid fa-truck"></i><span>Fleet Safety Platform</span></div>
+      <div class="app-card"><i class="fa-solid fa-bus-school"></i><span>School Bus Safety Network</span></div>
+      <div class="app-card"><i class="fa-solid fa-truck-medical"></i><span>Emergency Vehicle System</span></div>
+      <div class="app-card"><i class="fa-solid fa-microchip"></i><span>Smart V2V Module</span></div>
+      <div class="app-card"><i class="fa-solid fa-traffic-light"></i><span>Traffic Intelligence Platform</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- TEAM -->
 <section id="team">
   <div class="section-inner">
     <p class="section-label">The Team</p>
     <h2 class="section-title">Meet the Researchers</h2>
-    <p class="section-desc">
-      A multidisciplinary team of engineers and researchers working at the intersection
-      of embedded systems, wireless communication, and autonomous vehicles.
-    </p>
-
+    <p class="section-desc">Five engineers working across communication architecture, hardware integration, AI, security, and software development.</p>
     <div class="team-grid">
-
-      <!-- Member 1 — Update name, role, field, LinkedIn -->
       <div class="team-card">
-        <div class="avatar-ring"><!-- <img src="photo1.jpg" alt="Member 1"> -->GA</div>
-        <div class="member-name">G Arun</div>
+        <div class="avatar-ring">AR</div>
+        <div class="member-name">Arun</div>
         <div class="member-role">Lead Architect</div>
-        <div class="member-field">Communication Architecture &amp; CFNN Development</div>
-        <a href="https://www.linkedin.com/in/g-arun-511649213/" target="_blank" rel="noopener" class="member-linkedin">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
-        </a>
+        <div class="member-field">Communication Architecture &amp; CFNN Development, Protocol Design</div>
+        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
       </div>
-
-      <!-- Member 2 -->
       <div class="team-card">
-        <div class="avatar-ring">PV</div>
-        <div class="member-name">Prince V Joy</div>
-        <div class="member-role">Security Engineer</div>
-        <div class="member-field">Cybersecurity Framework &amp; Network Protocols</div>
-        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
-        </a>
-      </div>
-
-      <!-- Member 3 -->
-      <div class="team-card">
-        <div class="avatar-ring">AB</div>
-        <div class="member-name">Alan Biju</div>
+        <div class="avatar-ring">AL</div>
+        <div class="member-name">Alan</div>
         <div class="member-role">Research Engineer</div>
-        <div class="member-field">LoRa/DSRC Research &amp; AI Validation</div>
-        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
-        </a>
+        <div class="member-field">LoRa/DSRC Research, Dataset Creation &amp; AI Validation</div>
+        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
       </div>
-
-      <!-- Member 4 -->
       <div class="team-card">
-        <div class="avatar-ring">AA</div>
+        <div class="avatar-ring">RA</div>
+        <div class="member-name">Rathul</div>
+        <div class="member-role">Hardware Engineer</div>
+        <div class="member-field">OBD-II, CAN Bus &amp; Vehicle Integration</div>
+        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
+      </div>
+      <div class="team-card">
+        <div class="avatar-ring">PR</div>
+        <div class="member-name">Prince</div>
+        <div class="member-role">Security Engineer</div>
+        <div class="member-field">Cybersecurity Framework, AES Encryption &amp; Anti-Spoofing</div>
+        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
+      </div>
+      <div class="team-card">
+        <div class="avatar-ring">AI</div>
         <div class="member-name">Aiswarya</div>
         <div class="member-role">Software Engineer</div>
         <div class="member-field">Mobile App &amp; Dashboard Development</div>
-        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
-        </a>
-      </div>
-
-      <!-- Member 5 -->
-      <div class="team-card">
-        <div class="avatar-ring">RK</div>
-        <div class="member-name">Rathul Krishnan</div>
-        <div class="member-role">Hardware Engineer</div>
-        <div class="member-field">OBD-II, CAN Bus &amp; Vehicle Integration</div>
-        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- RESEARCH AREAS -->
-<section id="research">
-  <div class="section-inner">
-    <p class="section-label">Research Focus</p>
-    <h2 class="section-title">What We're Building</h2>
-    <p class="section-desc">
-      DriveQ 2.0 targets key challenges in V2V communication — latency, reliability,
-      and security at vehicular speeds.
-    </p>
-    <div class="research-grid">
-      <div class="research-card">
-        <div class="research-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
-        <h4>DSRC &amp; C-V2X Protocols</h4>
-        <p>Comparing Dedicated Short-Range Communication with Cellular V2X for sub-10ms latency in dense traffic.</p>
-      </div>
-      <div class="research-card">
-        <div class="research-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h4>Communication Security</h4>
-        <p>Lightweight cryptographic schemes for securing V2V message authenticity without latency overhead.</p>
-      </div>
-      <div class="research-card">
-        <div class="research-icon"><i class="fa-solid fa-microchip"></i></div>
-        <h4>Edge Processing</h4>
-        <p>On-device signal processing to reduce reliance on cloud infrastructure for time-critical decisions.</p>
-      </div>
-      <div class="research-card">
-        <div class="research-icon"><i class="fa-solid fa-car-side"></i></div>
-        <h4>Collision Avoidance</h4>
-        <p>Real-time V2V data fusion for cooperative collision warning and emergency braking systems.</p>
+        <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener" class="member-linkedin"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
       </div>
     </div>
   </div>
@@ -969,21 +691,11 @@
   <div class="section-inner">
     <p class="section-label">Get in Touch</p>
     <h2 class="section-title">Contact the Team</h2>
-    <p class="section-desc">
-      Interested in collaborating, citing our work, or following the project?
-      Reach out — we'd love to connect.
-    </p>
-
+    <p class="section-desc">Interested in collaborating, citing our work, or following the project? We'd love to connect.</p>
     <div class="contact-grid">
       <div class="contact-form">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" placeholder="e.g. Dr. Ravi Menon" />
-        </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" placeholder="you@institution.edu" />
-        </div>
+        <div class="form-group"><label>Your Name</label><input type="text" placeholder="e.g. Dr. Ravi Menon" /></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@institution.edu" /></div>
         <div class="form-group">
           <label>Subject</label>
           <select>
@@ -993,50 +705,29 @@
             <option>General Enquiry</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea placeholder="Tell us about your interest in V2V communication…"></textarea>
-        </div>
-        <button class="form-submit">
-          <i class="fa-solid fa-paper-plane"></i> Send Message
-        </button>
+        <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your interest in V2V communication…"></textarea></div>
+        <button class="form-submit" id="sendBtn"><i class="fa-solid fa-paper-plane"></i>Send Message</button>
       </div>
-
       <div class="contact-info">
         <div class="contact-item">
           <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
-          <div>
-            <h4>Email</h4>
-            <a href="mailto:driveq49@gmail.com">driveq49@gmail.com</a>
-          </div>
+          <div><h4>Email</h4><a href="mailto:driveq2@yourinstitution.edu">driveq2@yourinstitution.edu</a></div>
         </div>
         <div class="contact-item">
           <div class="contact-item-icon"><i class="fa-solid fa-building-columns"></i></div>
-          <div>
-            <h4>Institution</h4>
-            <p>DriveQ Research Team</p>
-          </div>
+          <div><h4>Institution</h4><p>Your College / University Name<br>Department of Electronics &amp; Communication</p></div>
         </div>
         <div class="contact-item">
           <div class="contact-item-icon"><i class="fa-brands fa-github"></i></div>
-          <div>
-            <h4>GitHub</h4>
-            <a href="https://arun2517.github.io/driveq2.0/" target="_blank" rel="noopener">arun2517.github.io/driveq2.0</a>
-          </div>
+          <div><h4>GitHub</h4><a href="https://github.com/your-repo" target="_blank" rel="noopener">github.com/your-org/driveq2</a></div>
         </div>
         <div class="contact-item">
           <div class="contact-item-icon"><i class="fa-solid fa-file-lines"></i></div>
-          <div>
-            <h4>IEEE Paper</h4>
-            <a href="https://ieeexplore.ieee.org/document/10559332" target="_blank" rel="noopener">View on IEEE Xplore →</a>
-          </div>
+          <div><h4>IEEE Paper</h4><a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener">View on IEEE Xplore →</a></div>
         </div>
         <div class="contact-item">
           <div class="contact-item-icon"><i class="fa-solid fa-location-dot"></i></div>
-          <div>
-            <h4>Location</h4>
-            <p>Kerala, India</p>
-          </div>
+          <div><h4>Location</h4><p>Kerala, India</p></div>
         </div>
       </div>
     </div>
@@ -1045,16 +736,13 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>
-    &copy; 2025 <strong>DriveQ 2.0</strong> Research Team &nbsp;·&nbsp;
-    V2V Communication System &nbsp;·&nbsp;
-    Published on <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.45); text-decoration:none;">IEEE Xplore 2024</a>
-  </p>
+  <p><strong>DriveQ 2.0</strong> &nbsp;·&nbsp; Intelligent V2V Communication Research &nbsp;·&nbsp; Kerala, India &nbsp;·&nbsp; <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener">IEEE Xplore 2024</a> &nbsp;·&nbsp; &copy; 2025 DriveQ Team</p>
+  <p style="margin-top:.5rem;font-style:italic;">"Driving Innovation. Building Safer Tomorrows."</p>
 </footer>
 
 <script>
-  document.querySelector('.form-submit').addEventListener('click', function() {
-    this.textContent = '✓ Message Sent!';
+  document.getElementById('sendBtn').addEventListener('click', function() {
+    this.innerHTML = '<i class="fa-solid fa-circle-check"></i> Message Sent!';
     this.style.background = '#10B981';
     setTimeout(() => {
       this.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
@@ -1062,6 +750,5 @@
     }, 3000);
   });
 </script>
-
 </body>
 </html>
