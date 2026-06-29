@@ -118,16 +118,16 @@ https://www.linkedin.com/in/g-arun-511649213/
 
 ### Project Guide
 
-*(Add Supervisor Details)*
+Nil
 
 ---
 
 ### Research Members
 
--Prince V Joy
--Alan Biju
--Rathul Krishnan
--Aiswarya
+- Prince V Joy
+- Alan Biju
+- Rathul Krishnan
+- Aiswarya
 
 ---
 
